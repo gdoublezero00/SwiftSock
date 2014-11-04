@@ -10,6 +10,7 @@
 		95069C521A0998D800146111 /* SwiftSock.h in Headers */ = {isa = PBXBuildFile; fileRef = 95069C511A0998D800146111 /* SwiftSock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95069C581A0998D800146111 /* SwiftSock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95069C4C1A0998D800146111 /* SwiftSock.framework */; };
 		95069C5F1A0998D800146111 /* SwiftSockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95069C5E1A0998D800146111 /* SwiftSockTests.swift */; };
+		95069C6A1A09995D00146111 /* SwiftSock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95069C691A09995D00146111 /* SwiftSock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		95069C571A0998D800146111 /* SwiftSockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftSockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95069C5D1A0998D800146111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95069C5E1A0998D800146111 /* SwiftSockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSockTests.swift; sourceTree = "<group>"; };
+		95069C691A09995D00146111 /* SwiftSock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +55,8 @@
 		95069C421A0998D800146111 = {
 			isa = PBXGroup;
 			children = (
-				95069C4E1A0998D800146111 /* SwiftSock */,
-				95069C5B1A0998D800146111 /* SwiftSockTests */,
+				95069C4E1A0998D800146111 /* Source */,
+				95069C5B1A0998D800146111 /* Tests */,
 				95069C4D1A0998D800146111 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,12 +70,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		95069C4E1A0998D800146111 /* SwiftSock */ = {
+		95069C4E1A0998D800146111 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				95069C511A0998D800146111 /* SwiftSock.h */,
+				95069C691A09995D00146111 /* SwiftSock.swift */,
 				95069C4F1A0998D800146111 /* Supporting Files */,
 			);
+			name = Source;
 			path = SwiftSock;
 			sourceTree = "<group>";
 		};
@@ -85,12 +89,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		95069C5B1A0998D800146111 /* SwiftSockTests */ = {
+		95069C5B1A0998D800146111 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				95069C5E1A0998D800146111 /* SwiftSockTests.swift */,
 				95069C5C1A0998D800146111 /* Supporting Files */,
 			);
+			name = Tests;
 			path = SwiftSockTests;
 			sourceTree = "<group>";
 		};
@@ -209,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95069C6A1A09995D00146111 /* SwiftSock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +325,7 @@
 		95069C631A0998D800146111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -328,12 +335,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		95069C641A0998D800146111 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
