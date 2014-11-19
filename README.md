@@ -1,0 +1,4 @@
+SocketConnector
+===============
+
+Swift socket library

@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol SocketConnectorDelegate {
+public protocol SwiftSockDelegate {
     func socketSuccess(info:Dictionary<String, String>!) -> Void
     func socketError(info:Dictionary<String, String>!, error:NSError!) -> Void
     func socketTimeout() -> Void
 }
 
-class SocketConnector: NSObject, NSStreamDelegate {
-    var delegate:SocketConnectorDelegate!
+public class SwiftSock: NSObject, NSStreamDelegate {
+    public var delegate:SwiftSockDelegate!
     
     private let BUFFER_SIZE = 1024
     private var inputStream:NSInputStream!
@@ -33,7 +33,7 @@ class SocketConnector: NSObject, NSStreamDelegate {
     //
     // MARK: Main Connection
     //
-    func connectionStart(server: NSString, port: Int, requestMessage: NSString, retryCount: Int) -> Void {
+    public func connectionStart(server: NSString, port: Int, requestMessage: NSString, retryCount: Int) -> Void {
         self.server = server
         self.port = UInt32(port)
         self.message = requestMessage
@@ -42,7 +42,7 @@ class SocketConnector: NSObject, NSStreamDelegate {
         self.connect()
     }
     
-    func connectionStart(server: NSString, port: Int, requestMessage: NSString) -> Void {
+    public func connectionStart(server: NSString, port: Int, requestMessage: NSString) -> Void {
         self.server = server
         self.port = UInt32(port)
         self.message = requestMessage
@@ -51,7 +51,7 @@ class SocketConnector: NSObject, NSStreamDelegate {
         self.connect()
     }
     
-    func connectionStartWithTag(tag: NSString, server: NSString, port: Int, requestMessage: NSString, retryCount: Int) -> Void {
+    public func connectionStartWithTag(tag: NSString, server: NSString, port: Int, requestMessage: NSString, retryCount: Int) -> Void {
         self.tag = tag
         self.server = server
         self.port = UInt32(port)
@@ -120,7 +120,7 @@ class SocketConnector: NSObject, NSStreamDelegate {
     //
     // MARK: NSStreamDelegate
     //
-    func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent) {
+    public func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent) {
         self.stopConnectionTimer()
         switch eventCode {
         case NSStreamEvent.OpenCompleted:
