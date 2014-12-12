@@ -179,7 +179,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
     func startConnectionTimer() -> Void {
         self.stopConnectionTimer()
         let interval:NSTimeInterval = 3.0
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "timeoutConnectionTime", userInfo: nil, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "timeoutConnectionTimer", userInfo: nil, repeats: false)
     }
     func stopConnectionTimer() -> Void {
         if self.timeoutTimer != nil {
