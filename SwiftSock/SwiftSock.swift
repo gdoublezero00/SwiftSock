@@ -11,7 +11,7 @@ import Foundation
 public protocol SwiftSockDelegate {
     func socketSuccess(info:Dictionary<String, String>!) -> Void
     func socketError(info:Dictionary<String, String>!, error:NSError!) -> Void
-    func socketTimeout() -> Void
+    func socketTimeout(info:Dictionary<String, String>!) -> Void
 }
 
 public class SwiftSock: NSObject, NSStreamDelegate {
@@ -114,7 +114,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
     }
     func handlerSocketTimeout() -> Void {
         self.connectionClose()
-        return delegate.socketTimeout()
+        return delegate.socketTimeout(self.statusDictionary)
     }
     
     //
