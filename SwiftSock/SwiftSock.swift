@@ -67,6 +67,8 @@ public class SwiftSock: NSObject, NSStreamDelegate {
     func connect() -> Void {
         var readStream:Unmanaged<CFReadStream>?
         var writeStream:Unmanaged<CFWriteStream>?
+        self.message = self.message + "EOF"
+        self.sendString = self.message
         
         CFStreamCreatePairWithSocketToHost(
             nil,
