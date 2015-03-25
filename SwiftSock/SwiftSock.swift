@@ -25,6 +25,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
     private var server:String!
     private var port:UInt32!
     private var message:String!
+    private var sendString:String!
     private var retry:Int!
     private var statusDictionary:Dictionary<String, String>!
     private var statusError:NSError! = nil
@@ -68,6 +69,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
         var readStream:Unmanaged<CFReadStream>?
         var writeStream:Unmanaged<CFWriteStream>?
         self.message = self.message + "EOF"
+        self.sendString = self.message
         
         CFStreamCreatePairWithSocketToHost(
             nil,
@@ -146,9 +148,16 @@ public class SwiftSock: NSObject, NSStreamDelegate {
             // Send Message
             if aStream == self.outputStream {
                 if (self.message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0) {
-                    let buf = self.message.cStringUsingEncoding(NSASCIIStringEncoding)!
-                    let len:UInt = UInt(strlen(buf))
-                    self.outputStream.write(UnsafePointer<UInt8>(buf), maxLength: Int(len))
+                    var sendString = self.message
+                    while sendString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+                        let limitLength = sendString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > BUFFER_SIZE ? BUFFER_SIZE : sendString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+                        let str = sendString.substringToIndex(advance(sendString.startIndex, limitLength))
+                        println(str)
+                        let buf = str.cStringUsingEncoding(NSASCIIStringEncoding)!
+                        let len:UInt = UInt(strlen(buf))
+                        self.outputStream.write(UnsafePointer<UInt8>(buf), maxLength: Int(len))
+                        sendString = sendString.substringFromIndex(advance(sendString.startIndex, limitLength))
+                    }
                     self.message = ""
                     self.mutableBuffer = NSMutableData()
                 }
