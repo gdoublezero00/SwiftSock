@@ -34,7 +34,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
     //
     // MARK: Main Connection
     //
-    public func connectionStart(server: NSString, port: Int, requestMessage: NSString, retryCount: Int) -> Void {
+    public func connectionStart(server: String, port: Int, requestMessage: String, retryCount: Int) -> Void {
         self.server = server
         self.port = UInt32(port)
         self.message = requestMessage
@@ -43,7 +43,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
         self.connect()
     }
     
-    public func connectionStart(server: NSString, port: Int, requestMessage: NSString) -> Void {
+    public func connectionStart(server: String, port: Int, requestMessage: String) -> Void {
         self.server = server
         self.port = UInt32(port)
         self.message = requestMessage
@@ -52,7 +52,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
         self.connect()
     }
     
-    public func connectionStartWithTag(tag: NSString, server: NSString, port: Int, requestMessage: NSString, retryCount: Int) -> Void {
+    public func connectionStartWithTag(tag: String, server: String, port: Int, requestMessage: String, retryCount: Int) -> Void {
         self.tag = tag
         self.server = server
         self.port = UInt32(port)
@@ -173,7 +173,7 @@ public class SwiftSock: NSObject, NSStreamDelegate {
                     }
                 }
                 self.statusDictionary["Tag"] = self.tag
-                self.statusDictionary["Message"] = NSString(bytes: mutableBuffer.bytes, length: mutableBuffer.length, encoding: NSShiftJISStringEncoding)
+                self.statusDictionary["Message"] = NSString(bytes: mutableBuffer.bytes, length: mutableBuffer.length, encoding: NSShiftJISStringEncoding)! as String
                 self.statusDictionary["StatusCode"] = "0"
                 self.statusDictionary["StatusMessage"] = "OK"
             }
